@@ -1,15 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --primary-black: #181818;
     --secondary-black: #212121;
-    --black-hover: #3D3D3D;
+    --black-hover: #3d3d3d;
     --primary-white: #ffffff;
-    --secondary-white: #AAAAAA;
+    --secondary-white: #aaaaaa;
 }
 
 body {
     background-color: var(--primary-black);
     color: var(--primary-white);
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
