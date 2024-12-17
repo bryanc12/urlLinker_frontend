@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~@flaticon/flaticon-uicons/css/solid/rounded";
+@import "~@flaticon/flaticon-uicons/css/brands/all";
+
 :root {
     --primary-black: #181818;
     --secondary-black: #212121;
@@ -21,6 +24,10 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
 #root {
@@ -28,4 +35,16 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
