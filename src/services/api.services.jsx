@@ -27,9 +27,9 @@ async function getUrl(id) {
     }
 }
 
-const apiService = {
+const apiServices = {
     submitUrl,
     getUrl,
 };
 
-export default apiService;
+export default apiServices;

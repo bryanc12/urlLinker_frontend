@@ -1,1 +1,9 @@
-// export { default as EXAMPLE } from "./EXAMPLE.svg";
+import github from "./github";
+import heart from "./heart";
+
+const icon = {
+    github,
+    heart,
+};
+
+export default icon;

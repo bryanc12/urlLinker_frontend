@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~@flaticon/flaticon-uicons/css/solid/rounded";
-@import "~@flaticon/flaticon-uicons/css/brands/all";
+/* @import "~@flaticon/flaticon-uicons/css/solid/rounded";
+@import "~@flaticon/flaticon-uicons/css/brands/all"; */
 
 :root {
     --primary-black: #181818;

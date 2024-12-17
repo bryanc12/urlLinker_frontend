@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
 
-import apiService from "../../services/api.services";
+import apiServices from "../../services/api.services";
+import icons from "../../assets/img";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function Homepage() {
@@ -23,7 +24,7 @@ export default function Homepage() {
             setRequestError(false);
         }
 
-        const response = await apiService.submitUrl(urlInput, cloudflareToken);
+        const response = await apiServices.submitUrl(urlInput, cloudflareToken);
         if (response) {
             setShortenedUrl(response);
             setRequestError(false);
@@ -128,7 +129,10 @@ export default function Homepage() {
                             Bryan
                         </a>
                         with{" "}
-                        <i className="fi fi-sr-heart pt-[2px] text-red-500" />{" "}
+                        {/* <i className="fi fi-sr-heart pt-[2px] text-red-500" />{" "} */}
+                        <div className="w-4 h-4 text-red-500">
+                            <icons.heart />
+                        </div>
                         love.
                     </div>
                 </div>
@@ -154,7 +158,10 @@ export default function Homepage() {
                     </div>
                     <div className="flex gap-1 items-center justify-center">
                         source code available on
-                        <i className="fi fi-brands-github pt-[2px]" />
+                        {/* <i className="fi fi-brands-github pt-[2px]" /> */}
+                        <div className="w-4 h-4">
+                            <icons.github />
+                        </div>
                         Github.
                     </div>
                 </div>
