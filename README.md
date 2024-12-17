@@ -1,4 +1,17 @@
-# Environmental Variables
+# UrlLinker Frontend Server
 
-1. REACT_APP_API_URL
-2. REACT_APP_CLOUDFLARE_KEY
+An url shortener frontend server built with NodeJS and React JS framework. With Cloudflare and Cloudflare Turnstile supported.
+
+## Environmental variables
+
+All the environmental variables are optional.
+
+1. `REACT_APP_API_URL` URL of the backend server.
+2. `REACT_APP_CLOUDFLARE_KEY` Cloudflare Turnstile API key.
+
+Example:
+
+```env
+REACT_APP_API_URL=
+REACT_APP_CLOUDFLARE_KEY=
+```
