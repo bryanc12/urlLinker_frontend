@@ -11,6 +11,16 @@ export default function Url() {
         const response = await apiService.getUrl(url);
         if (response) {
             setOriginalUrl(response);
+
+            if (
+                response === "http:" ||
+                response === "https:" ||
+                response === "http://" ||
+                response === "https://"
+            ) {
+                return;
+            }
+
             window.location.href = response;
         }
     };
@@ -25,6 +35,11 @@ export default function Url() {
                 {originalUrl !== "" ? (
                     <>
                         <div>Redirecting to Page...</div>
+                        <div className="text-sm font-light tracking-widest my-1 break-all">
+                            {"Original URL: "}
+                            {originalUrl.substring(0, 50)}
+                            {originalUrl.length > 50 && "..."}
+                        </div>
                         <a
                             className="tracking-normal text-base font-normal underline hover:cursor-pointer"
                             href={originalUrl}

@@ -9,6 +9,7 @@ export default function Homepage() {
     const [cloudflareToken, setCloudflareToken] = useState("");
     const [shortenedUrl, setShortenedUrl] = useState("");
     const [requestError, setRequestError] = useState(false);
+    const [cloudflareError, setCloudflareError] = useState(false);
 
     const cloudflareRef = useRef();
 
@@ -77,7 +78,11 @@ export default function Homepage() {
                 </div>
                 <Turnstile
                     siteKey={process.env.REACT_APP_CLOUDFLARE_KEY}
-                    onSuccess={(token) => setCloudflareToken(token)}
+                    onSuccess={(token) => {
+                        setCloudflareToken(token);
+                        setCloudflareError(false);
+                    }}
+                    onError={() => setCloudflareError(true)}
                     ref={cloudflareRef}
                 />
                 {shortenedUrl !== "" && (
@@ -102,6 +107,11 @@ export default function Homepage() {
                 {requestError && (
                     <div className="text-red-500 bg-white py-2 px-4 rounded font-bold">
                         Error submitting URL. Please try again.
+                    </div>
+                )}
+                {cloudflareError && (
+                    <div className="text-red-500 bg-white py-2 px-4 rounded font-bold">
+                        Error with Cloudflare. Please try again.
                     </div>
                 )}
             </div>
