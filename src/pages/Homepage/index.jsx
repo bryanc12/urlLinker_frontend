@@ -80,32 +80,30 @@ export default function Homepage() {
                     onSuccess={(token) => setCloudflareToken(token)}
                     ref={cloudflareRef}
                 />
-                <div className="flex gap-3 items-center">
-                    {shortenedUrl !== "" && (
-                        <>
-                            <div>Shortened URL:</div>
-                            <a
-                                href={`https://urllinker.bryanc12.net/${shortenedUrl}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="underline"
-                            >
-                                https://urllinker.bryanc12.net/{shortenedUrl}
-                            </a>
-                            <button
-                                className="border-2 border-solid hover:bg-white/30 active:bg-white/50 duration-150 py-0.5 px-1 rounded"
-                                onClick={copyToClipboard}
-                            >
-                                Copy
-                            </button>
-                        </>
-                    )}
-                    {requestError && (
-                        <div className="text-red-500 bg-white py-2 px-4 rounded font-bold">
-                            Error submitting URL. Please try again.
-                        </div>
-                    )}
-                </div>
+                {shortenedUrl === "" && (
+                    <div className="flex flex-col sm:flex-row sm:gap-3 items-center">
+                        <div>Shortened URL:</div>
+                        <a
+                            href={`https://urllinker.bryanc12.net/${shortenedUrl}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline"
+                        >
+                            https://urllinker.bryanc12.net/{shortenedUrl}
+                        </a>
+                        <button
+                            className="border-2 border-solid hover:bg-white/30 active:bg-white/50 duration-150 py-0.5 px-1 rounded mt-5 sm:mt-0"
+                            onClick={copyToClipboard}
+                        >
+                            Copy
+                        </button>
+                    </div>
+                )}
+                {requestError && (
+                    <div className="text-red-500 bg-white py-2 px-4 rounded font-bold">
+                        Error submitting URL. Please try again.
+                    </div>
+                )}
             </div>
             <div className="mt-12 flex flex-col items-center gap-4 sm:gap-1">
                 <div className="flex flex-col sm:flex-row sm:gap-1 sm:items-center">
