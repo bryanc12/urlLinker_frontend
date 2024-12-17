@@ -80,7 +80,7 @@ export default function Homepage() {
                     onSuccess={(token) => setCloudflareToken(token)}
                     ref={cloudflareRef}
                 />
-                {shortenedUrl === "" && (
+                {shortenedUrl !== "" && (
                     <div className="flex flex-col sm:flex-row sm:gap-3 items-center">
                         <div>Shortened URL:</div>
                         <a
