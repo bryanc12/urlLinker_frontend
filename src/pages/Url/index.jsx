@@ -10,8 +10,6 @@ export default function Url() {
     const getUrl = async () => {
         const response = await apiService.getUrl(url);
         if (response) {
-            setOriginalUrl(response);
-
             if (
                 response === "http:" ||
                 response === "https:" ||
@@ -21,6 +19,7 @@ export default function Url() {
                 return;
             }
 
+            setOriginalUrl(response);
             window.location.href = response;
         }
     };
