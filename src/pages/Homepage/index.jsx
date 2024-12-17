@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import apiService from "../../services/api.services";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -8,16 +8,29 @@ export default function Homepage() {
     const [urlInput, setUrlInput] = useState("");
     const [cloudflareToken, setCloudflareToken] = useState("");
     const [shortenedUrl, setShortenedUrl] = useState("");
+    const [requestError, setRequestError] = useState(false);
+
+    const cloudflareRef = useRef();
 
     const handleUrlInput = (e) => {
         setUrlInput(e.target.value);
     };
 
     const handleUrlSubmit = async () => {
+        if (requestError) {
+            await cloudflareRef.current.reset();
+            setRequestError(false);
+        }
+
         const response = await apiService.submitUrl(urlInput, cloudflareToken);
         if (response) {
             setShortenedUrl(response);
+            setRequestError(false);
+            return;
         }
+
+        setShortenedUrl("");
+        setRequestError(true);
     };
 
     const copyToClipboard = async () => {
@@ -65,6 +78,7 @@ export default function Homepage() {
                 <Turnstile
                     siteKey={process.env.REACT_APP_CLOUDFLARE_KEY}
                     onSuccess={(token) => setCloudflareToken(token)}
+                    ref={cloudflareRef}
                 />
                 <div className="flex gap-3 items-center">
                     {shortenedUrl !== "" && (
@@ -86,43 +100,55 @@ export default function Homepage() {
                             </button>
                         </>
                     )}
+                    {requestError && (
+                        <div className="text-red-500 bg-white py-2 px-4 rounded font-bold">
+                            Error submitting URL. Please try again.
+                        </div>
+                    )}
                 </div>
             </div>
-            <div className="mt-12 flex flex-col items-center gap-1">
-                <div className="flex gap-1">
+            <div className="mt-12 flex flex-col items-center gap-4 sm:gap-1">
+                <div className="flex flex-col sm:flex-row sm:gap-1 sm:items-center">
                     An URL shortener created by
-                    <a
-                        className="font-bold"
-                        href="https://github.com/bryanc12"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Bryan
-                    </a>
-                    with <i className="fi fi-sr-heart pt-[2px] text-red-500" />{" "}
-                    love.
+                    <div className="flex gap-1 items-center justify-center">
+                        <a
+                            className="font-bold"
+                            href="https://github.com/bryanc12"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Bryan
+                        </a>
+                        with{" "}
+                        <i className="fi fi-sr-heart pt-[2px] text-red-500" />{" "}
+                        love.
+                    </div>
                 </div>
-                <div className="flex gap-1">
-                    <a
-                        className="font-bold"
-                        href="https://github.com/bryanc12/urlLinker_frontend"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Frontend
-                    </a>
-                    {" & "}
-                    <a
-                        className="font-bold"
-                        href="https://github.com/bryanc12/urlLinker_backend"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Backend
-                    </a>
-                    source code available on
-                    <i className="fi fi-brands-github pt-[2px]" />
-                    Github.
+                <div className="flex flex-col sm:flex-row sm:gap-1 sm:items-center">
+                    <div>
+                        <a
+                            className="font-bold"
+                            href="https://github.com/bryanc12/urlLinker_frontend"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Frontend
+                        </a>
+                        {" & "}
+                        <a
+                            className="font-bold"
+                            href="https://github.com/bryanc12/urlLinker_backend"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Backend
+                        </a>
+                    </div>
+                    <div className="flex gap-1 items-center justify-center">
+                        source code available on
+                        <i className="fi fi-brands-github pt-[2px]" />
+                        Github.
+                    </div>
                 </div>
             </div>
         </div>
