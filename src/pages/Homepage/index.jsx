@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 
 import apiService from "../../services/api.services";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function Homepage() {
     const [urlInput, setUrlInput] = useState("");
+    const [cloudflareToken, setCloudflareToken] = useState("");
     const [shortenedUrl, setShortenedUrl] = useState("");
 
     const handleUrlInput = (e) => {
@@ -12,7 +14,7 @@ export default function Homepage() {
     };
 
     const handleUrlSubmit = async () => {
-        const response = await apiService.submitUrl(urlInput);
+        const response = await apiService.submitUrl(urlInput, cloudflareToken);
         if (response) {
             setShortenedUrl(response);
         }
@@ -53,12 +55,17 @@ export default function Homepage() {
                         onChange={handleUrlInput}
                     />
                     <button
-                        className="bg-white/20 hover:bg-white/30 active:bg-white/50 duration-150 text-white py-2 px-4 rounded font-bold"
+                        className="bg-white/20 hover:bg-white/30 active:bg-white/50 duration-150 text-white py-2 px-4 rounded font-bold disabled:opacity-30 disabled:cursor-not-allowed"
                         onClick={handleUrlSubmit}
+                        disabled={cloudflareToken === "" || urlInput === ""}
                     >
                         Submit
                     </button>
                 </div>
+                <Turnstile
+                    siteKey={process.env.REACT_APP_CLOUDFLARE_KEY}
+                    onSuccess={(token) => setCloudflareToken(token)}
+                />
                 <div className="flex gap-3 items-center">
                     {shortenedUrl !== "" && (
                         <>

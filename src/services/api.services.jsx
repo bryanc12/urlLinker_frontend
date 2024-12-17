@@ -2,11 +2,12 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
-async function submitUrl(url) {
+async function submitUrl(url, cloudflareToken) {
     try {
         const response = await axios.post(`${BASE_URL}/`, null, {
             params: {
                 url: url,
+                captcha_token: cloudflareToken,
             },
         });
         return response.data;

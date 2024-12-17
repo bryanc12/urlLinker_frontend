@@ -1,0 +1,4 @@
+# Environmental Variables
+
+1. REACT_APP_API_URL
+2. REACT_APP_CLOUDFLARE_KEY
