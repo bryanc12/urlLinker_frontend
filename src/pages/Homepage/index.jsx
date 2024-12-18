@@ -85,6 +85,7 @@ export default function Homepage() {
                     }}
                     onError={() => setCloudflareError(true)}
                     ref={cloudflareRef}
+                    className="h-[65px]"
                 />
                 {shortenedUrl !== "" && (
                     <div className="flex flex-col sm:flex-row sm:gap-3 items-center">
