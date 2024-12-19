@@ -5,6 +5,7 @@ import "./assets/css/root.css";
 
 import Homepage from "./pages/Homepage";
 import Url from "./pages/Url";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -12,6 +13,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/:url" element={<Url />} />
+
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     );
